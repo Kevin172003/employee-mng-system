@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Employee List{% endblock %}
+
+{% block content %}
+<table class="styled-table">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Role</th>
+            <th>Experience</th>
+            <th>Phone Number</th>
+            {% if user_role == "admin" %}
+            <th>Update</th>
+            <th>Delete</th>
+            {% endif %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for emp in employees %}
+        <tr>
+            <td>{{ emp.fname }}</td>
+            <td>{{ emp.lname }}</td>
+            <td>{{ emp.role }}</td>
+            <td>{{ emp.experience }} years</td>
+            <td>{{ emp.phone_number }}</td>
+            {% if user_role == "admin" %}
+            <td><a href="/employees/update-form/{{ emp.emp_id }}" class="btn btn-primary">Edit</a></td>
+            <td><button onclick="deleteEmployee('{{ emp.emp_id }}')" class="btn btn-danger">Delete</button></td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

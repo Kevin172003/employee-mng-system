@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Register</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <header>
+    <h1>Register</h1>
+    <nav>
+      <a href="/employees/get_employees">Home</a>
+    </nav>
+  </header>
+  <main>
+    <form id="register-form" method="post" action="/register">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required>
+      <br>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+      <br>
+      <label for="role">Role:</label>
+      <select id="role" name="role">
+        <option value="viewer">Viewer</option>
+        <option value="admin">Admin</option>
+      </select>
+      <br>
+      <button type="submit">Register</button>
+    </form>
+    <div id="register-msg"></div>
+  </main>
+  
+</body>
+<script>
+    document.getElementById("register-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+      const role = document.getElementById("role").value;
+    
+      const response = await fetch("/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ username, password, role })
+      });
+    
+      const data = await response.json();
+      document.getElementById("register-msg").innerText = data.msg || data.detail;
+    });
+    </script>
+    
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Employee Management{% endblock %}</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <header>
+    <h1>Employee Management</h1>
+    <nav>
+      {% if user_role == "admin" %}
+      <a href="/register">Register</a> |
+      <a href="/employees/create">Add Employee</a> |
+      {% endif %}
+      <a href="/login">Login</a> |
+      <a href="/employees/get_employees">Home</a>
+    </nav>
+  </header>
+  <main>
+    {% block content %}
+    <!-- Default content can go here -->
+    {% endblock %}
+  </main>
+  <script src="/static/js/main.js"></script>
+</body>
+</html>
