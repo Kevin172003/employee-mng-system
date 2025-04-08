@@ -2,7 +2,6 @@ from fastapi.testclient import TestClient
 from auth import require_admin
 from routers import router 
 from main import app 
-import pytest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from database import Base
